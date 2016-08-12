@@ -1,0 +1,26 @@
+#version 400 core
+
+layout (location = 0) in vec3 vertices;
+layout (location = 1) in vec2 tex_coords;
+layout (location = 2) in vec3 normals;
+
+uniform bool lighting;
+
+uniform mat4 ml_matrix;
+uniform mat4 pr_matrix;
+uniform mat4 vw_matrix;
+
+uniform vec3 lightPosition;
+
+out vec2 uvs;
+out vec3 surfaceNormal;
+out vec3 toLightVector;
+
+void main(void) {
+	vec4 worldPosition = ml_matrix * vec4(vertices, 1.0);
+	gl_Position = pr_matrix * vw_matrix * worldPosition;
+	uvs = tex_coords;
+
+	surfaceNormal = (ml_matrix * vec4(normals, 1.0)).xyz;
+	toLightVector = lightPosition - worldPosition.xyz;
+}
