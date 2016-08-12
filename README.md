@@ -2,6 +2,10 @@
 Proton is an upcoming video game. 
 
 DAY 1:
+
+
+![alt tag](https://github.com/Distinguishable/Proton/blob/master/Proton_Day1.PNG)
+
   
       Implemented Features:
               
