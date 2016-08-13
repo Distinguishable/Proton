@@ -24,11 +24,13 @@ namespace proton {
 					return false;
 				}
 
-				glfwWindowHint(GLFW_SAMPLES, 2); // 4x antialiasing
-				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // We want OpenGL 3.3
+				
+				glfwWindowHint(GLFW_SAMPLES, 2); 
+				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
 				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-				glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
-				glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL 
+				glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); 
+				glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); 
+				
 
 				this->pr_Window = glfwCreateWindow(this->pr_Width, this->pr_Height, this->pr_Title, NULL, NULL);
 				
@@ -37,8 +39,8 @@ namespace proton {
 					return false;
 				}
 
-				glfwMakeContextCurrent(this->pr_Window); // Initialize GLEW
-				glewExperimental = true; // Needed in core profile
+				glfwMakeContextCurrent(this->pr_Window);
+				glewExperimental = true;
 
 				if (glewInit() != GLEW_OK) {
 					std::cout << "Could not Initilize GLEW" << std::endl;
@@ -49,8 +51,8 @@ namespace proton {
 			}
 
 			void Window::Update() {
-				glfwPollEvents();
 				glfwSwapBuffers(this->pr_Window);
+				glfwPollEvents();
 			}
 
 			void Window::Clear() {

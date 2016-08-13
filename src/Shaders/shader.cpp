@@ -14,11 +14,9 @@ namespace proton {
 			}
 
 			GLuint Shader::load() {
-				// Create the shaders
 				GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 				GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
-				// Read the Vertex Shader code from the file
 				std::string VertexShaderCode;
 				std::ifstream VertexShaderStream(pr_VertPath, std::ios::in);
 				if (VertexShaderStream.is_open()) {
@@ -33,7 +31,6 @@ namespace proton {
 					return 0;
 				}
 
-				// Read the Fragment Shader code from the file
 				std::string FragmentShaderCode;
 				std::ifstream FragmentShaderStream(pr_FragPath, std::ios::in);
 				if (FragmentShaderStream.is_open()) {
@@ -47,13 +44,11 @@ namespace proton {
 				int InfoLogLength;
 
 
-				// Compile Vertex Shader
 				printf("Compiling shader : %s\n", pr_VertPath);
 				char const * VertexSourcePointer = VertexShaderCode.c_str();
 				glShaderSource(VertexShaderID, 1, &VertexSourcePointer, NULL);
 				glCompileShader(VertexShaderID);
 
-				// Check Vertex Shader
 				glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &Result);
 				glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 				if (InfoLogLength > 0) {
@@ -64,13 +59,11 @@ namespace proton {
 
 
 
-				// Compile Fragment Shader
 				printf("Compiling shader : %s\n", pr_FragPath);
 				char const * FragmentSourcePointer = FragmentShaderCode.c_str();
 				glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer, NULL);
 				glCompileShader(FragmentShaderID);
 
-				// Check Fragment Shader
 				glGetShaderiv(FragmentShaderID, GL_COMPILE_STATUS, &Result);
 				glGetShaderiv(FragmentShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 				if (InfoLogLength > 0) {
@@ -81,14 +74,12 @@ namespace proton {
 
 
 
-				// Link the program
 				printf("Linking program\n");
 				GLuint ProgramID = glCreateProgram();
 				glAttachShader(ProgramID, VertexShaderID);
 				glAttachShader(ProgramID, FragmentShaderID);
 				glLinkProgram(ProgramID);
 
-				// Check the program
 				glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
 				glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 				if (InfoLogLength > 0) {
